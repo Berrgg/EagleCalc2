@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Line.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Product.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\AzureCloudService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\AzureCloudTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">

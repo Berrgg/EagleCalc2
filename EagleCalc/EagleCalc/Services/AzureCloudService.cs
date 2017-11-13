@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using System.Threading.Tasks;
 using EagleCalc.Abstractions;
 using EagleCalc.Helpers;
+using EagleCalc.Models;
 
 namespace EagleCalc.Services
 {
@@ -17,9 +16,10 @@ namespace EagleCalc.Services
             Client = new MobileServiceClient(Locations.AppServiceUrl);
         }
 
-        public Task<ICloudTable<T>> GetTableAsync<T>() where T : TableData
+        public async Task<ICloudTable<T>> GetTableAsync<T>() where T : TableData
         {
-            throw new NotImplementedException();
+            await InitializeAsync();
+            return new AzureCloudTable<T>(Client);
         }
 
         #region Offline sync
@@ -29,12 +29,20 @@ namespace EagleCalc.Services
                 return;
 
             var store = new MobileServiceSQLiteStore("eagledb.db");
+            store.DefineTable<EagleBatch>();
 
+            await Client.SyncContext.InitializeAsync(store);
+            await SyncOfflineCacheAsync();
         }
 
-        public Task SyncOfflineCacheAsync()
+        public async Task SyncOfflineCacheAsync()
         {
-            throw new NotImplementedException();
+            await InitializeAsync();
+
+            await Client.SyncContext.PushAsync();
+
+            var tbl = await GetTableAsync<EagleBatch>();
+            await tbl.PullAsync();
         }
         #endregion
 
