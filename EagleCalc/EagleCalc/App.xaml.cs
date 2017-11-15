@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using EagleCalc.Abstractions;
+using EagleCalc.Helpers;
+using EagleCalc.Services;
 using Xamarin.Forms;
 
 namespace EagleCalc
@@ -11,9 +9,8 @@ namespace EagleCalc
 	{
 		public App ()
 		{
-			InitializeComponent();
-
-			MainPage = new EagleCalc.MainPage();
+            ServiceLocator.Add<ICloudService, AzureCloudService>();
+			MainPage = new NavigationPage(new Pages.StartPage());
 		}
 
 		protected override void OnStart ()
