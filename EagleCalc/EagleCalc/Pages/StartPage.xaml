@@ -4,7 +4,7 @@
              x:Class="EagleCalc.Pages.StartPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Welcome to Xamarin.Forms Kris!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

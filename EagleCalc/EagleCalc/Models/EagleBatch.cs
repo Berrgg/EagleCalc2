@@ -12,6 +12,6 @@ namespace EagleCalc.Models
         public string PluCode { get; set; }
         public double Weight { get; set; }
         public double TrayCl { get; set; }
-        public DateTime ProductionDate { get; set; }
+        public DateTimeOffset ProductionDate { get; set; }
     }
 }
