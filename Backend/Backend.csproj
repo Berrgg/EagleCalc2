@@ -176,10 +176,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
-    <Compile Include="Controllers\TestTableController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DataObjects\TestTable.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Migrations\201711161413558_Init.cs" />
     <Compile Include="Migrations\201711161413558_Init.Designer.cs">
@@ -188,6 +186,10 @@
     <Compile Include="Migrations\201711161838329_TestTable.cs" />
     <Compile Include="Migrations\201711161838329_TestTable.Designer.cs">
       <DependentUpon>201711161838329_TestTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711161852102_DeleteTestTable.cs" />
+    <Compile Include="Migrations\201711161852102_DeleteTestTable.Designer.cs">
+      <DependentUpon>201711161852102_DeleteTestTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
@@ -216,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711161838329_TestTable.resx">
       <DependentUpon>201711161838329_TestTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711161852102_DeleteTestTable.resx">
+      <DependentUpon>201711161852102_DeleteTestTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

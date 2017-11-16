@@ -35,6 +35,6 @@ namespace Backend.Models
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
 
-        public System.Data.Entity.DbSet<Backend.DataObjects.TestTable> TestTables { get; set; }
+     //   public System.Data.Entity.DbSet<Backend.DataObjects.TestTable> TestTables { get; set; }
     }
 }
