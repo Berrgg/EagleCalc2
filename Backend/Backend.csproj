@@ -176,8 +176,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
+    <Compile Include="Controllers\LineController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DataObjects\Line.cs" />
+    <Compile Include="DataObjects\Product.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Migrations\201711161413558_Init.cs" />
     <Compile Include="Migrations\201711161413558_Init.Designer.cs">
@@ -190,6 +194,14 @@
     <Compile Include="Migrations\201711161852102_DeleteTestTable.cs" />
     <Compile Include="Migrations\201711161852102_DeleteTestTable.Designer.cs">
       <DependentUpon>201711161852102_DeleteTestTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711200647227_AddTableLine.cs" />
+    <Compile Include="Migrations\201711200647227_AddTableLine.Designer.cs">
+      <DependentUpon>201711200647227_AddTableLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711200654114_AddTableProduct.cs" />
+    <Compile Include="Migrations\201711200654114_AddTableProduct.Designer.cs">
+      <DependentUpon>201711200654114_AddTableProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
@@ -221,6 +233,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711161852102_DeleteTestTable.resx">
       <DependentUpon>201711161852102_DeleteTestTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711200647227_AddTableLine.resx">
+      <DependentUpon>201711200647227_AddTableLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711200654114_AddTableProduct.resx">
+      <DependentUpon>201711200654114_AddTableProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
