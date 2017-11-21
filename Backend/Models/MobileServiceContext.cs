@@ -35,11 +35,11 @@ namespace Backend.Models
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
 
-        public System.Data.Entity.DbSet<Backend.DataObjects.Line> Lines { get; set; }
+        public DbSet<Line> Lines { get; set; }
 
-        public System.Data.Entity.DbSet<Backend.DataObjects.Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public System.Data.Entity.DbSet<Backend.DataObjects.EagleBatch> EagleBatches { get; set; }
+        public DbSet<EagleBatch> EagleBatches { get; set; }
 
         //   public System.Data.Entity.DbSet<Backend.DataObjects.TestTable> TestTables { get; set; }
     }
