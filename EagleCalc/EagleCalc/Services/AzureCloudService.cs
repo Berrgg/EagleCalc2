@@ -18,7 +18,7 @@ namespace EagleCalc.Services
 
         public async Task<ICloudTable<T>> GetTableAsync<T>() where T : TableData
         {
-            await InitializeAsync();
+          //  await InitializeAsync();
             return new AzureCloudTable<T>(Client);
         }
 
