@@ -39,6 +39,8 @@ namespace Backend.Models
 
         public System.Data.Entity.DbSet<Backend.DataObjects.Product> Products { get; set; }
 
+        public System.Data.Entity.DbSet<Backend.DataObjects.EagleBatch> EagleBatches { get; set; }
+
         //   public System.Data.Entity.DbSet<Backend.DataObjects.TestTable> TestTables { get; set; }
     }
 }
