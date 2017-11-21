@@ -179,12 +179,9 @@
     <Compile Include="Controllers\EagleBatchController.cs" />
     <Compile Include="Controllers\LineController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataObjects\EagleBatch.cs" />
     <Compile Include="DataObjects\Line.cs" />
     <Compile Include="DataObjects\Product.cs" />
-    <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Migrations\201711161413558_Init.cs" />
     <Compile Include="Migrations\201711161413558_Init.Designer.cs">
       <DependentUpon>201711161413558_Init.cs</DependentUpon>
@@ -208,6 +205,10 @@
     <Compile Include="Migrations\201711210618339_AddTableEagleBatch.cs" />
     <Compile Include="Migrations\201711210618339_AddTableEagleBatch.Designer.cs">
       <DependentUpon>201711210618339_AddTableEagleBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711210626551_DeleteTableTodoItem.cs" />
+    <Compile Include="Migrations\201711210626551_DeleteTableTodoItem.Designer.cs">
+      <DependentUpon>201711210626551_DeleteTableTodoItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
@@ -248,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711210618339_AddTableEagleBatch.resx">
       <DependentUpon>201711210618339_AddTableEagleBatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711210626551_DeleteTableTodoItem.resx">
+      <DependentUpon>201711210626551_DeleteTableTodoItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
