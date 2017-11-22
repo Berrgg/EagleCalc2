@@ -18,7 +18,7 @@ namespace EagleCalc.Services
 
         public async Task<ICloudTable<T>> GetTableAsync<T>() where T : TableData
         {
-          //  await InitializeAsync();
+            await InitializeAsync();
             return new AzureCloudTable<T>(Client);
         }
 
@@ -30,6 +30,7 @@ namespace EagleCalc.Services
 
             var store = new MobileServiceSQLiteStore("eagledb.db");
             store.DefineTable<EagleBatch>();
+            store.DefineTable<Line>();
 
             await Client.SyncContext.InitializeAsync(store);
             await SyncOfflineCacheAsync();
@@ -42,6 +43,9 @@ namespace EagleCalc.Services
             await Client.SyncContext.PushAsync();
 
             var tbl = await GetTableAsync<EagleBatch>();
+            await tbl.PullAsync();
+
+            var tbl2 = await GetTableAsync<Line>();
             await tbl.PullAsync();
         }
         #endregion

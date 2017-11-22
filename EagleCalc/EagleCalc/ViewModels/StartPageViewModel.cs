@@ -33,6 +33,8 @@ namespace EagleCalc.ViewModels
 
             try
             {
+                await CloudService.SyncOfflineCacheAsync();
+
                 var table = await CloudService.GetTableAsync<Line>();
                 var list = await table.ReadAllItemsAsync();
 
