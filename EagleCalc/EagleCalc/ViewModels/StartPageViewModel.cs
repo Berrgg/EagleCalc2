@@ -16,21 +16,13 @@ namespace EagleCalc.ViewModels
         {
             Title = "Start page";
 
-
-
-            //TakeLineListCommand = new Command(async () => await TakeLineList());
-
-            //TakeLineListCommand.Execute(null);
-
-            TakeLines();
+            TakeLineListCommand = new Command(async () => await TakeLineList());
+            TakeLineListCommand.Execute(null);
         }
 
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
         public ICommand TakeLineListCommand { get; }
-        //public List<string> LineList;
 
-        //List<string> lineNames = new List<string>();
-        //public List<string> LineNames
         ObservableCollection<string> lineNames = new ObservableCollection<string>();
         public ObservableCollection<string> LineNames
         {
@@ -46,8 +38,6 @@ namespace EagleCalc.ViewModels
 
             try
             {
-              //  await CloudService.SyncOfflineCacheAsync();
-
                 var table = CloudService.GetTable<Line>();
                 var list = await table.ReadAllItemsAsync();
 
@@ -65,11 +55,5 @@ namespace EagleCalc.ViewModels
                 IsBusy = false;
             }
         }
-
-        async Task TakeLines()
-        {
-            await TakeLineList();
-        }
-
     }
 }
