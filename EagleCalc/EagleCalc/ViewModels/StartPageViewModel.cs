@@ -6,6 +6,7 @@ using EagleCalc.Abstractions;
 using EagleCalc.Helpers;
 using EagleCalc.Models;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace EagleCalc.ViewModels
 {
@@ -15,32 +16,44 @@ namespace EagleCalc.ViewModels
         {
             Title = "Start page";
 
-            
 
-            TakeLineListCommand = new Command(async () => await TakeLineList());
 
-            TakeLineListCommand.Execute(null);
+            //TakeLineListCommand = new Command(async () => await TakeLineList());
+
+            //TakeLineListCommand.Execute(null);
+
+            TakeLines();
         }
 
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
         public ICommand TakeLineListCommand { get; }
-        public List<string> LineList;
+        //public List<string> LineList;
+
+        //List<string> lineNames = new List<string>();
+        //public List<string> LineNames
+        ObservableCollection<string> lineNames = new ObservableCollection<string>();
+        public ObservableCollection<string> LineNames
+        {
+            get { return lineNames; }
+            set { SetProperty(ref lineNames, value, "LineNames"); }
+        }
 
         async Task TakeLineList()
         {
             if (IsBusy)
                 return;
+            IsBusy = true;
 
             try
             {
-                await CloudService.SyncOfflineCacheAsync();
+              //  await CloudService.SyncOfflineCacheAsync();
 
-                var table = await CloudService.GetTableAsync<Line>();
+                var table = CloudService.GetTable<Line>();
                 var list = await table.ReadAllItemsAsync();
 
                 foreach (var item in list)
                 {
-                    LineList.Add(item.LineName);
+                    LineNames.Add(item.LineName);
                 }
             }
             catch (Exception ex)
@@ -51,6 +64,11 @@ namespace EagleCalc.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        async Task TakeLines()
+        {
+            await TakeLineList();
         }
 
     }

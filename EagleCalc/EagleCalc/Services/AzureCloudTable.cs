@@ -9,10 +9,12 @@ namespace EagleCalc.Services
 {
     public class AzureCloudTable<T> : ICloudTable<T> where T : TableData
     {
-        IMobileServiceSyncTable<T> table;
+        //IMobileServiceSyncTable<T> table;
+        IMobileServiceTable<T> table;
+
         public AzureCloudTable(MobileServiceClient client)
         {
-            table = client.GetSyncTable<T>();
+            table = client.GetTable<T>();
         }
 
         #region ICloudTable implementation
@@ -28,33 +30,38 @@ namespace EagleCalc.Services
             await table.DeleteAsync(item);
         }
 
-        public async Task PullAsync()
-        {
-            string queryName = $"incsync_{typeof(T).Name}";
-            await table.PullAsync(queryName, table.CreateQuery());
-        }
+        //public async Task PullAsync()
+        //{
+        //    string queryName = $"incsync_{typeof(T).Name}";
+        //    await table.PullAsync(queryName, table.CreateQuery());
+        //}
 
         public async Task<ICollection<T>> ReadAllItemsAsync()
         {
-            List<T> allItems = new List<T>();
-
-            var pageSize = 50;
-            var hasMore = true;
-
-            while (hasMore)
-            {
-                var pageOfItems = await table.Skip(allItems.Count).Take(pageSize).ToListAsync();
-                if (pageOfItems.Count > 0)
-                {
-                    allItems.AddRange(pageOfItems);
-                }
-                else
-                {
-                    hasMore = false;
-                }
-            }
-            return allItems;
+            return await table.ToListAsync();
         }
+
+        //public async Task<ICollection<T>> ReadAllItemsAsync()
+        //{
+        //    List<T> allItems = new List<T>();
+
+        //    var pageSize = 50;
+        //    var hasMore = true;
+
+        //    while (hasMore)
+        //    {
+        //        var pageOfItems = await table.Skip(allItems.Count).Take(pageSize).ToListAsync();
+        //        if (pageOfItems.Count > 0)
+        //        {
+        //            allItems.AddRange(pageOfItems);
+        //        }
+        //        else
+        //        {
+        //            hasMore = false;
+        //        }
+        //    }
+        //    return allItems;
+        //}
 
         public async Task<T> ReadItemAsync(string id)
         {
