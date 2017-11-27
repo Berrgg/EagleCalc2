@@ -23,6 +23,8 @@ namespace EagleCalc.ViewModels
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
         public ICommand TakeLineListCommand { get; }
 
+        public string SelectedLine { get; set; }
+
         ObservableCollection<string> lineNames = new ObservableCollection<string>();
         public ObservableCollection<string> LineNames
         {
