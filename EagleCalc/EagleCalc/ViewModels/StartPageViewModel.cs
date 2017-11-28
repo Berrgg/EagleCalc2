@@ -25,6 +25,20 @@ namespace EagleCalc.ViewModels
 
         public string SelectedLine { get; set; }
 
+        bool isPickerEnable;
+        public bool IsPickerEnable
+        {
+            get { return isPickerEnable; }
+            set
+            {
+                if(isPickerEnable != value)
+                {
+                    isPickerEnable = value;
+                    OnPropertyChanged(nameof(IsPickerEnable));
+                }
+            }
+        }
+
         ObservableCollection<string> lineNames = new ObservableCollection<string>();
         public ObservableCollection<string> LineNames
         {
