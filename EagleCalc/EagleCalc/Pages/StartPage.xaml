@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EagleCalc.Pages.StartPage"
+             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
              Title="{Binding Title}">
     <AbsoluteLayout BackgroundColor="Red">
         <StackLayout AbsoluteLayout.LayoutBounds="0, 50, 1, 1" AbsoluteLayout.LayoutFlags="SizeProportional"  BackgroundColor="Yellow">
@@ -9,7 +10,12 @@
                     ItemsSource="{Binding LineNames}"
                     SelectedItem="{Binding SelectedLine, Mode=TwoWay}" />
             <Picker Title="Customer"
-                    ItemsSource="{Binding Customers}" />
+                    ItemsSource="{Binding Customers}"
+                    SelectedItem="{Binding CustomerName, Mode=OneWay}">
+                <Picker.Behaviors >
+                    <behaviors:InvokeCommandAction Command ="{Binding }"/>
+                </Picker.Behaviors>
+            </Picker>
             <Picker Title="Product" IsEnabled ="{Binding IsPickerEnable}"/>
         </StackLayout>
         <ActivityIndicator AbsoluteLayout.LayoutBounds="0.5, 0.5, 50, 50" AbsoluteLayout.LayoutFlags="PositionProportional"

@@ -23,6 +23,7 @@ namespace EagleCalc.ViewModels
 
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
         public ICommand TakeListsCommand { get; }
+        public ICommand TakeProducts { get; }
 
         public string SelectedLine { get; set; }
 
@@ -36,6 +37,20 @@ namespace EagleCalc.ViewModels
                 {
                     isPickerEnable = value;
                     OnPropertyChanged(nameof(IsPickerEnable));
+                }
+            }
+        }
+
+        string customerName;
+        public string CustomerName
+        {
+            get { return customerName; }
+            set
+            {
+                if(customerName != value)
+                {
+                    customerName = value;
+                    OnPropertyChanged(nameof(CustomerName));
                 }
             }
         }
