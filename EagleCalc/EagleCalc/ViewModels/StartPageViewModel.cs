@@ -7,6 +7,7 @@ using EagleCalc.Helpers;
 using EagleCalc.Models;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace EagleCalc.ViewModels
 {
@@ -58,9 +59,9 @@ namespace EagleCalc.ViewModels
                 var list = await table.ReadAllItemsAsync();
 
                 foreach (var item in list)
-                {
                     LineNames.Add(item.LineName);
-                }
+
+                LineNames = new ObservableCollection<string>(LineNames.OrderBy(i => i));
             }
             catch (Exception ex)
             {
