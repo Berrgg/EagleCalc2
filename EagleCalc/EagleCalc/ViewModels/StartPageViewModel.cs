@@ -17,16 +17,16 @@ namespace EagleCalc.ViewModels
         {
             Title = "Start page";
 
-            TakeLineListCommand = new Command(async () => await TakeLineList());
-            TakeLineListCommand.Execute(null);
+            TakeListsCommand = new Command(async () => await TakeLists());
+            TakeListsCommand.Execute(null);
         }
 
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
-        public ICommand TakeLineListCommand { get; }
+        public ICommand TakeListsCommand { get; }
 
         public string SelectedLine { get; set; }
 
-        bool isPickerEnable;
+        bool isPickerEnable = false;
         public bool IsPickerEnable
         {
             get { return isPickerEnable; }
@@ -47,7 +47,14 @@ namespace EagleCalc.ViewModels
             set { SetProperty(ref lineNames, value, "LineNames"); }
         }
 
-        async Task TakeLineList()
+        ObservableCollection<string> customers = new ObservableCollection<string>();
+        public ObservableCollection<string> Customers
+        {
+            get { return customers; }
+            set { SetProperty(ref customers, value, "Customers"); }
+        }
+
+        async Task TakeLists()
         {
             if (IsBusy)
                 return;
@@ -62,6 +69,15 @@ namespace EagleCalc.ViewModels
                     LineNames.Add(item.LineName);
 
                 LineNames = new ObservableCollection<string>(LineNames.OrderBy(i => i));
+
+                var tblCustomer = CloudService.GetTable<Customer>();
+                var listCustomer = await tblCustomer.ReadAllItemsAsync();
+
+                foreach (var itemCust in listCustomer)
+                    Customers.Add(itemCust.CustomerName);
+
+                Customers = new ObservableCollection<string>(Customers.OrderBy(i => i));
+
             }
             catch (Exception ex)
             {
