@@ -176,9 +176,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EagleBatchController.cs" />
     <Compile Include="Controllers\LineController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="DataObjects\Customer.cs" />
     <Compile Include="DataObjects\EagleBatch.cs" />
     <Compile Include="DataObjects\Line.cs" />
     <Compile Include="DataObjects\Product.cs" />
@@ -209,6 +211,14 @@
     <Compile Include="Migrations\201711210626551_DeleteTableTodoItem.cs" />
     <Compile Include="Migrations\201711210626551_DeleteTableTodoItem.Designer.cs">
       <DependentUpon>201711210626551_DeleteTableTodoItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711290704063_AddFieldCustomerName.cs" />
+    <Compile Include="Migrations\201711290704063_AddFieldCustomerName.Designer.cs">
+      <DependentUpon>201711290704063_AddFieldCustomerName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711290709099_AddTableCustomer.cs" />
+    <Compile Include="Migrations\201711290709099_AddTableCustomer.Designer.cs">
+      <DependentUpon>201711290709099_AddTableCustomer.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
@@ -252,6 +262,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711210626551_DeleteTableTodoItem.resx">
       <DependentUpon>201711210626551_DeleteTableTodoItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711290704063_AddFieldCustomerName.resx">
+      <DependentUpon>201711290704063_AddFieldCustomerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711290709099_AddTableCustomer.resx">
+      <DependentUpon>201711290709099_AddTableCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

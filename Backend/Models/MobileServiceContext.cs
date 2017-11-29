@@ -41,6 +41,8 @@ namespace Backend.Models
 
         public DbSet<EagleBatch> EagleBatches { get; set; }
 
+        public System.Data.Entity.DbSet<Backend.DataObjects.Customer> Customers { get; set; }
+
         //   public System.Data.Entity.DbSet<Backend.DataObjects.TestTable> TestTables { get; set; }
     }
 }
