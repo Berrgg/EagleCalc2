@@ -122,12 +122,14 @@ namespace EagleCalc.ViewModels
             try
             {
                 var table1 = CloudService.GetTable<Product>();
-                var products = await table1.ReadProducts("Aldi");
+                var products = await table1.ReadProducts(CustomerName);
 
                 Products.Clear();
 
                 foreach (var prod in products)
                     Products.Add(prod.Description);
+
+                Products = new ObservableCollection<string>(Products.OrderBy(i => i));
             }
             catch (Exception ex)
             {

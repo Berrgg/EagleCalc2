@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:behaviors ="clr-namespace:Behaviors;assembly=Behaviors"
              x:Class="EagleCalc.Pages.StartPage"
              Title="{Binding Title}">
     <AbsoluteLayout BackgroundColor="Red">
@@ -11,12 +10,8 @@
                     SelectedItem="{Binding SelectedLine, Mode=TwoWay}" />
             <Picker Title="Customer"
                     ItemsSource="{Binding Customers}"
-                    SelectedItem="{Binding CustomerName, Mode=OneWay}" >
-                <Picker.Behaviors >
-                    <behaviors:EventHandlerBehavior EventName="SelectedIndexChanged">
-                        <behaviors:InvokeCommandAction Command ="{Binding TakeProducts}" />
-                    </behaviors:EventHandlerBehavior>
-                </Picker.Behaviors>
+                    SelectedItem="{Binding CustomerName, Mode=TwoWay}" 
+                    SelectedIndexChanged="Picker_SelectedIndexChanged">
             </Picker>
             <Picker Title="Product" 
                     IsEnabled ="{Binding IsPickerEnable}"
