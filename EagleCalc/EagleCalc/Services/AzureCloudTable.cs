@@ -41,6 +41,11 @@ namespace EagleCalc.Services
             return await table.ToListAsync();
         }
 
+        public async Task<ICollection<T>> ReadProducts(string customer)
+        {
+            return await table.Where(x => x.CustomerName == customer).ToListAsync();
+        }
+
         //public async Task<ICollection<T>> ReadAllItemsAsync()
         //{
         //    List<T> allItems = new List<T>();

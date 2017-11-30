@@ -18,7 +18,10 @@ namespace EagleCalc.ViewModels
             Title = "Start page";
 
             TakeListsCommand = new Command(async () => await TakeLists());
+            TakeProducts = new Command(async () => await TakeCustomerProducts());
+
             TakeListsCommand.Execute(null);
+         //   TakeProducts.Execute(null);
         }
 
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
@@ -27,7 +30,7 @@ namespace EagleCalc.ViewModels
 
         public string SelectedLine { get; set; }
 
-        bool isPickerEnable = false;
+        bool isPickerEnable = true;
         public bool IsPickerEnable
         {
             get { return isPickerEnable; }
@@ -69,6 +72,13 @@ namespace EagleCalc.ViewModels
             set { SetProperty(ref customers, value, "Customers"); }
         }
 
+        ObservableCollection<string> products = new ObservableCollection<string>();
+        public ObservableCollection<string> Products
+        {
+            get { return products; }
+            set { SetProperty(ref products, value, "Products"); }
+        }
+
         async Task TakeLists()
         {
             if (IsBusy)
@@ -92,11 +102,36 @@ namespace EagleCalc.ViewModels
                     Customers.Add(itemCust.CustomerName);
 
                 Customers = new ObservableCollection<string>(Customers.OrderBy(i => i));
-
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Lines not loaded", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        async Task TakeCustomerProducts()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
+            {
+                var table1 = CloudService.GetTable<Product>();
+                var products = await table1.ReadProducts("Aldi");
+
+                Products.Clear();
+
+                foreach (var prod in products)
+                    Products.Add(prod.Description);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Products not loaded", ex.Message, "OK");
             }
             finally
             {
