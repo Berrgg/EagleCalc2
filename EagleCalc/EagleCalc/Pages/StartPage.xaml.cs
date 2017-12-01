@@ -18,7 +18,16 @@ namespace EagleCalc.Pages
         {
             if(vm != null)
             {
-                vm.TakeProducts.Execute(null);
+                vm.SetFields();
+                vm.TakeProductsCommand.Execute(null);
+            }
+        }
+
+        private void PickerProduct_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if(vm != null)
+            {
+                vm.ProductSelectedIndex = pickerProduct.SelectedIndex;
             }
         }
     }

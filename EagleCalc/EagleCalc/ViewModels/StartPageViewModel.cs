@@ -18,15 +18,14 @@ namespace EagleCalc.ViewModels
             Title = "Start page";
 
             TakeListsCommand = new Command(async () => await TakeLists());
-            TakeProducts = new Command(async () => await TakeCustomerProducts());
+            TakeProductsCommand = new Command(async () => await TakeCustomerProducts());
 
             TakeListsCommand.Execute(null);
-         //   TakeProducts.Execute(null);
         }
 
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
         public ICommand TakeListsCommand { get; }
-        public ICommand TakeProducts { get; }
+        public ICommand TakeProductsCommand { get; }
 
         public string SelectedLine { get; set; }
 
@@ -58,6 +57,24 @@ namespace EagleCalc.ViewModels
             }
         }
 
+        int productSelectedIndex = -1;
+        public int ProductSelectedIndex
+        {
+            get { return productSelectedIndex; }
+            set
+            {
+                if (productSelectedIndex != value && value != -1)
+                {
+                    productSelectedIndex = value;
+                    _productCode = _products.ElementAt(productSelectedIndex).ProductCode;
+                    _productDescription = _products.ElementAt(productSelectedIndex).Description;
+                }
+            }
+        }
+
+        private string _productCode;
+        private string _productDescription;
+
         ObservableCollection<string> lineNames = new ObservableCollection<string>();
         public ObservableCollection<string> LineNames
         {
@@ -79,6 +96,9 @@ namespace EagleCalc.ViewModels
             set { SetProperty(ref products, value, "Products"); }
         }
 
+        private ICollection<Product> _products;
+
+        #region Methods
         async Task TakeLists()
         {
             if (IsBusy)
@@ -122,14 +142,14 @@ namespace EagleCalc.ViewModels
             try
             {
                 var table1 = CloudService.GetTable<Product>();
-                var products = await table1.ReadProducts(CustomerName);
+                _products = await table1.ReadProducts(CustomerName);
 
                 Products.Clear();
 
-                foreach (var prod in products)
+                foreach (var prod in _products)
                     Products.Add(prod.Description);
 
-                Products = new ObservableCollection<string>(Products.OrderBy(i => i));
+               // Products = new ObservableCollection<string>(Products.OrderBy(i => i));
             }
             catch (Exception ex)
             {
@@ -140,5 +160,13 @@ namespace EagleCalc.ViewModels
                 IsBusy = false;
             }
         }
+
+        public void SetFields()
+        {
+            productSelectedIndex = -1;
+            _productCode = string.Empty;
+            _productDescription = string.Empty;
+        }
+        #endregion
     }
 }
