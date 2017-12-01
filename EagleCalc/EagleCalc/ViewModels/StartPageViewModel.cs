@@ -27,7 +27,11 @@ namespace EagleCalc.ViewModels
         public ICommand TakeListsCommand { get; }
         public ICommand TakeProductsCommand { get; }
 
+        private ICollection<Product> _products;
+
         public string SelectedLine { get; set; }
+        private string _productCode;
+        private string _productDescription;
 
         bool isPickerEnable = true;
         public bool IsPickerEnable
@@ -72,9 +76,6 @@ namespace EagleCalc.ViewModels
             }
         }
 
-        private string _productCode;
-        private string _productDescription;
-
         ObservableCollection<string> lineNames = new ObservableCollection<string>();
         public ObservableCollection<string> LineNames
         {
@@ -95,8 +96,6 @@ namespace EagleCalc.ViewModels
             get { return products; }
             set { SetProperty(ref products, value, "Products"); }
         }
-
-        private ICollection<Product> _products;
 
         #region Methods
         async Task TakeLists()
