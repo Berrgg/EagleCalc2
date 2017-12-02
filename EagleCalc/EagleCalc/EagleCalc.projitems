@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\EagleBatch.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Line.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Product.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ProductInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ProductBatches.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

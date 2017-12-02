@@ -165,7 +165,7 @@ namespace EagleCalc.ViewModels
         async Task BatchesPage()
         {
             if(!string.IsNullOrEmpty(SelectedLine) && !string.IsNullOrEmpty(customerName) && productSelectedIndex != -1)
-
+                await Application.Current.MainPage.Navigation.PushAsync(new Pages.ProductBatches())
         }
 
         public void SetFields()
