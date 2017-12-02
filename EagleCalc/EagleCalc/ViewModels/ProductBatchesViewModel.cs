@@ -10,7 +10,7 @@ namespace EagleCalc.ViewModels
     {
         public ProductBatchesViewModel(ProductInfo productInfo)
         {
-
+            Title = productInfo.ProdDescription;
         }
     }
 }
