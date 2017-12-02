@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Linq;
 using EagleCalc.Abstractions;
 using EagleCalc.Helpers;
 using EagleCalc.Models;
 using Xamarin.Forms;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace EagleCalc.ViewModels
 {
