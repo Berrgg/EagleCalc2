@@ -19,6 +19,7 @@ namespace EagleCalc.ViewModels
 
             TakeListsCommand = new Command(async () => await TakeLists());
             TakeProductsCommand = new Command(async () => await TakeCustomerProducts());
+            BatchesPageCommand = new Command(async () => await BatchesPage());
 
             TakeListsCommand.Execute(null);
         }
@@ -26,6 +27,7 @@ namespace EagleCalc.ViewModels
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
         public ICommand TakeListsCommand { get; }
         public ICommand TakeProductsCommand { get; }
+        public ICommand BatchesPageCommand { get; }
 
         private ICollection<Product> _products;
 
@@ -158,6 +160,12 @@ namespace EagleCalc.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        async Task BatchesPage()
+        {
+            if(!string.IsNullOrEmpty(SelectedLine) && !string.IsNullOrEmpty(customerName) && productSelectedIndex != -1)
+
         }
 
         public void SetFields()
