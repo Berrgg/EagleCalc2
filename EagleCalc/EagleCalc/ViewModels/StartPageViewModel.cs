@@ -165,7 +165,20 @@ namespace EagleCalc.ViewModels
         async Task BatchesPage()
         {
             if(!string.IsNullOrEmpty(SelectedLine) && !string.IsNullOrEmpty(customerName) && productSelectedIndex != -1)
-                await Application.Current.MainPage.Navigation.PushAsync(new Pages.ProductBatches())
+            {
+                ProductInfo prodInfo = new ProductInfo
+                {
+                    ProductionLine = SelectedLine,
+                    Customer = customerName,
+                    ProdCode = _productCode,
+                    ProdDescription = _productDescription
+                };
+                await Application.Current.MainPage.Navigation.PushAsync(new Pages.ProductBatches(prodInfo));
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Please fill all empty fields.","OK");
+            }
         }
 
         public void SetFields()
