@@ -10,7 +10,7 @@ namespace EagleCalc
 		public App ()
 		{
             ServiceLocator.Add<ICloudService, AzureCloudService>();
-			MainPage = new NavigationPage(new Pages.StartPage());
+			MainPage = new NavigationPage(new Pages.StartPage()) { BarBackgroundColor=Color.Gray, BarTextColor=Color.Wheat };
 		}
 
 		protected override void OnStart ()
