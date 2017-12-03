@@ -11,6 +11,11 @@ namespace EagleCalc.ViewModels
         public ProductBatchesViewModel(ProductInfo productInfo)
         {
             Title = productInfo.ProdDescription;
+            ProductInfo = productInfo;
         }
+
+        public ProductInfo ProductInfo { get; set; }
+
+
     }
 }

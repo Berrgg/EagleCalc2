@@ -3,11 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EagleCalc.Pages.ProductBatches"
              Title="{Binding Title}">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <AbsoluteLayout BackgroundColor="#333333">
+        <AbsoluteLayout BackgroundColor="#333333" AbsoluteLayout.LayoutBounds="0, 0, 1, 50" AbsoluteLayout.LayoutFlags="WidthProportional">
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="33*" />
+                        <ColumnDefinition Width="33*" />
+                        <ColumnDefinition Width="34*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" 
+                           FontSize="Large" Text="{Binding ProductInfo.ProductionLine}" TextColor="WhiteSmoke" 
+                           VerticalTextAlignment="End" HorizontalTextAlignment="Center" />
+                    <Label Grid.Row="0" Grid.Column="1" 
+                           FontSize="Large" Text="{Binding ProductInfo.Customer}" TextColor="WhiteSmoke" 
+                           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                    <Label Grid.Row="0" Grid.Column="2"
+                           FontSize="Large" Text="{Binding ProductInfo.ProdCode}" TextColor="WhiteSmoke"
+                           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 60, 1, 90" AbsoluteLayout.LayoutFlags="SizeProportional">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <ListView IsPullToRefreshEnabled="True" 
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+                          SeparatorColor="#cccccc">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="5">
+                                    
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </AbsoluteLayout>
+    </AbsoluteLayout>
+
 </ContentPage>
