@@ -29,12 +29,18 @@
             <StackLayout VerticalOptions="FillAndExpand">
                 <ListView IsPullToRefreshEnabled="True" 
                           IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+                          ItemsSource="{Binding BatchList}"
                           SeparatorColor="#cccccc">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Padding="5">
-                                    
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="CenterAndExpand"
+                                             Padding="5">
+                                    <Label HorizontalOptions="FillAndExpand" Text="{Binding IdBatch}" TextColor="WhiteSmoke" />
+                                    <Label HorizontalOptions="FillAndExpand" Text="{Binding Weight}" TextColor="WhiteSmoke" />
+                                    <Label HorizontalOptions="FillAndExpand" Text="{Binding TrayCl, StringFormat= 'CL: {0:F2}'}" TextColor="WhiteSmoke" />
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

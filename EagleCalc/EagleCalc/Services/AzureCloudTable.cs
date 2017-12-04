@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using EagleCalc.Abstractions;
+using EagleCalc.Models;
 
 namespace EagleCalc.Services
 {
@@ -44,6 +46,11 @@ namespace EagleCalc.Services
         public async Task<ICollection<T>> ReadProducts(string customer)
         {
             return await table.Where(x => x.CustomerName == customer).ToListAsync();
+        }
+
+        public async Task<ICollection<T>> ReadBatchWeightAverage(string line)
+        {
+            return await table.Where(x => x.Line == line).ToListAsync();
         }
 
         //public async Task<ICollection<T>> ReadAllItemsAsync()

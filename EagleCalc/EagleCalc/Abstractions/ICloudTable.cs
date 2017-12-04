@@ -13,6 +13,7 @@ namespace EagleCalc.Abstractions
         Task<ICollection<T>> ReadAllItemsAsync();
         Task<ICollection<T>> ReadItemsAsync(int start, int count);
         Task<ICollection<T>> ReadProducts(string customer);
+        Task<ICollection<T>> ReadBatchWeightAverage(string line);
       //  Task PullAsync();
     }
 }

@@ -13,5 +13,6 @@ namespace EagleCalc.Models
         public double Weight { get; set; }
         public double TrayCl { get; set; }
         public DateTimeOffset ProductionDate { get; set; }
+        public bool IsPrinted { get; set; }
     }
 }
