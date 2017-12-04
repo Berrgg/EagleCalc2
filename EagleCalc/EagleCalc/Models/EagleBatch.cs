@@ -7,7 +7,7 @@ namespace EagleCalc.Models
     {
         public string IdBatch { get; set; }
         public string ProductCode { get; set; }
-        public string Line { get; set; }
+        new public string Line { get; set; }
         public string TrayId { get; set; }
         public string PluCode { get; set; }
         public double Weight { get; set; }
