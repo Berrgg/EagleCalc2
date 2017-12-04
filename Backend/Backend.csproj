@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201711290709099_AddTableCustomer.Designer.cs">
       <DependentUpon>201711290709099_AddTableCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712041231357_AddFieldIsPrinted.cs" />
+    <Compile Include="Migrations\201712041231357_AddFieldIsPrinted.Designer.cs">
+      <DependentUpon>201712041231357_AddFieldIsPrinted.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -280,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711290709099_AddTableCustomer.resx">
       <DependentUpon>201711290709099_AddTableCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041231357_AddFieldIsPrinted.resx">
+      <DependentUpon>201712041231357_AddFieldIsPrinted.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
