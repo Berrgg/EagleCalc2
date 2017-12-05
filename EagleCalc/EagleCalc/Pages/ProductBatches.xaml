@@ -30,6 +30,7 @@
                 <ListView IsPullToRefreshEnabled="True" 
                           ItemsSource="{Binding BatchList}"
                           RefreshCommand="{Binding RefreshBatchListCommand}"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                           SeparatorColor="#cccccc">
                     <ListView.ItemTemplate>
                         <DataTemplate>

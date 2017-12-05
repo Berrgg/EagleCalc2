@@ -34,6 +34,7 @@ namespace EagleCalc.ViewModels
 
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
         public ICommand RefreshBatchListCommand { get; }
+        public ProductInfo ProductInfo { get; set; }
 
         ObservableCollection<EagleBatch> batchList = new ObservableCollection<EagleBatch>();
         public ObservableCollection<EagleBatch> BatchList
@@ -42,7 +43,19 @@ namespace EagleCalc.ViewModels
             set { SetProperty(ref batchList, value, "BatchList"); }
         }
 
-        public ProductInfo ProductInfo { get; set; }
+        EagleBatch selectedItem;
+        public EagleBatch SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                SetProperty(ref selectedItem, value, "SelectedItem");
+                if(selectedItem != null)
+                {
+
+                }
+            }
+        }
 
         async Task RefreshBatchList()
         {
