@@ -19,8 +19,6 @@ namespace EagleCalc.ViewModels
             Title = productInfo.ProductionLine;
             ProductInfo = productInfo;
 
-            IsBusy = false;
-
             RefreshBatchListCommand = new Command(async () => await RefreshBatchList());
 
             MessagingCenter.Subscribe<ScanPageViewModel>(this, "ItemsChanged", async (sender) =>
@@ -29,6 +27,8 @@ namespace EagleCalc.ViewModels
             });
 
             RefreshBatchListCommand.Execute(null);
+
+            IsBusy = false;
         }
 
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
