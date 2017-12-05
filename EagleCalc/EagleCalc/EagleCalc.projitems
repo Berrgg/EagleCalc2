@@ -29,12 +29,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ProductBatches.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ScanPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\StartPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Services\AzureCloudService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\AzureCloudTable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ProductBatchesViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ScanPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StartPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\ProductBatches.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\ScanPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
