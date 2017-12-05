@@ -23,11 +23,10 @@ namespace EagleCalc.ViewModels
 
             RefreshBatchListCommand = new Command(async () => await RefreshBatchList());
 
-            // change subscribe page on ScanPage
-            //MessagingCenter.Subscribe<StartPageViewModel>(this, "ItemsChanged", async (sender) =>
-            //{
-            //    await RefreshBatchList();
-            //});
+            MessagingCenter.Subscribe<ScanPageViewModel>(this, "ItemsChanged", async (sender) =>
+            {
+                await RefreshBatchList();
+            });
 
             RefreshBatchListCommand.Execute(null);
         }
@@ -52,7 +51,8 @@ namespace EagleCalc.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if(selectedItem != null)
                 {
-
+                    Application.Current.MainPage.Navigation.PushAsync(new Pages.ScanPage(selectedItem));
+                    selectedItem = null;
                 }
             }
         }
