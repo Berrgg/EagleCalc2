@@ -16,8 +16,10 @@ namespace EagleCalc.ViewModels
     {
         public ProductBatchesViewModel(ProductInfo productInfo)
         {
-            Title = productInfo.ProdDescription;
+            Title = productInfo.ProductionLine;
             ProductInfo = productInfo;
+
+            IsBusy = false;
 
             RefreshBatchListCommand = new Command(async () => await RefreshBatchList());
 
@@ -45,7 +47,7 @@ namespace EagleCalc.ViewModels
             try
             {
                 var table = CloudService.GetTable<EagleBatch>();
-                var list = await table.ReadBatchWeightAverage(ProductInfo.ProductionLine);
+                var list = await table.ReadBatchWeightAverage(DateTime.Today);
 
                 foreach (var item in list)
                     BatchList.Add(item);
