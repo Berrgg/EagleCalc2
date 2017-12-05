@@ -68,6 +68,8 @@ namespace EagleCalc.ViewModels
                 var table = CloudService.GetTable<EagleBatch>();
                 var list = await table.ReadBatchWeightAverage(DateTime.Today, ProductInfo.ProductionLine, ProductInfo.ProdCode);
 
+                BatchList.Clear();
+
                 foreach (var item in list)
                     BatchList.Add(item);
 
