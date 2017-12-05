@@ -28,8 +28,8 @@
         <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 60, 1, 90" AbsoluteLayout.LayoutFlags="SizeProportional">
             <StackLayout VerticalOptions="FillAndExpand">
                 <ListView IsPullToRefreshEnabled="True" 
-
                           ItemsSource="{Binding BatchList}"
+                          RefreshCommand="{Binding RefreshBatchListCommand}"
                           SeparatorColor="#cccccc">
                     <ListView.ItemTemplate>
                         <DataTemplate>

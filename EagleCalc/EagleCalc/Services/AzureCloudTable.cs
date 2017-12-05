@@ -48,9 +48,9 @@ namespace EagleCalc.Services
             return await table.Where(x => x.CustomerName == customer).ToListAsync();
         }
 
-        public async Task<ICollection<T>> ReadBatchWeightAverage(DateTimeOffset todatDate)
+        public async Task<ICollection<T>> ReadBatchWeightAverage(DateTimeOffset todatDate, string line, string productCode)
         {
-            return await table.Where(x => x.ProductionDate == todatDate).ToListAsync();
+            return await table.Where(x => x.ProductionDate == todatDate && x.Line == line && x.ProductCode == productCode).ToListAsync();
         }
 
         //public async Task<ICollection<T>> ReadAllItemsAsync()

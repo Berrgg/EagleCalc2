@@ -11,5 +11,6 @@ namespace EagleCalc.Abstractions
         public string CustomerName { get; set; }
         public string Line { get; set; }
         public DateTimeOffset ProductionDate { get; set; }
+        public string ProductCode { get; set; }
     }
 }

@@ -29,7 +29,7 @@
                            IsVisible="True"/>
         <AbsoluteLayout BackgroundColor="#333333" AbsoluteLayout.LayoutBounds="0, 1, 1, 0.2" AbsoluteLayout.LayoutFlags="YProportional, SizeProportional" >
             <Button BackgroundColor="#cccccc" TextColor="#333333" 
-                    Text="Go to batches" 
+                    Text="List of batches" 
                     Command="{Binding BatchesPageCommand}"
                     AbsoluteLayout.LayoutBounds="0.5, 0.5, 100, 50" 
                     AbsoluteLayout.LayoutFlags="PositionProportional" />

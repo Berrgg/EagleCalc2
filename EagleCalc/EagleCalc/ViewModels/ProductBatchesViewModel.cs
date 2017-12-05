@@ -23,6 +23,12 @@ namespace EagleCalc.ViewModels
 
             RefreshBatchListCommand = new Command(async () => await RefreshBatchList());
 
+            // change subscribe page on ScanPage
+            //MessagingCenter.Subscribe<StartPageViewModel>(this, "ItemsChanged", async (sender) =>
+            //{
+            //    await RefreshBatchList();
+            //});
+
             RefreshBatchListCommand.Execute(null);
         }
 
@@ -47,7 +53,7 @@ namespace EagleCalc.ViewModels
             try
             {
                 var table = CloudService.GetTable<EagleBatch>();
-                var list = await table.ReadBatchWeightAverage(DateTime.Today);
+                var list = await table.ReadBatchWeightAverage(DateTime.Today, ProductInfo.ProductionLine, ProductInfo.ProdCode);
 
                 foreach (var item in list)
                     BatchList.Add(item);
