@@ -28,6 +28,7 @@
         <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 60, 1, 90" AbsoluteLayout.LayoutFlags="SizeProportional">
             <StackLayout VerticalOptions="FillAndExpand">
                 <ListView IsPullToRefreshEnabled="True" 
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                           ItemsSource="{Binding BatchList}"
                           RefreshCommand="{Binding RefreshBatchListCommand}"
                           SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
