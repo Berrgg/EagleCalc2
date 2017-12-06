@@ -8,7 +8,7 @@ namespace EagleCalc.ViewModels
 {
     public class ScanPageViewModel :BaseViewModel
     {
-        public ScanPageViewModel(EagleBatch item = null)
+        public ScanPageViewModel(EagleBatch item = null, ProductInfo productInfo = null)
         {
 
         }

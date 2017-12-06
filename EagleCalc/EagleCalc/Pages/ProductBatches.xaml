@@ -50,6 +50,15 @@
                 </ListView>
             </StackLayout>
         </AbsoluteLayout>
+        
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 1, 1, 50" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional">
+            <Button AbsoluteLayout.LayoutBounds="0.5, 0.5, 100, 50" AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Text="New Batch" 
+                    TextColor="#333333" 
+                    BackgroundColor="#cccccc" 
+                    Command="{Binding AddNewBatchCommand}" />
+        </AbsoluteLayout>
     </AbsoluteLayout>
+
 
 </ContentPage>

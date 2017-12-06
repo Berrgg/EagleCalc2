@@ -13,10 +13,10 @@ namespace EagleCalc.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ScanPage : ContentPage
 	{
-		public ScanPage (EagleBatch item = null)
+		public ScanPage (EagleBatch item = null, ProductInfo productInfo = null)
 		{
 			InitializeComponent ();
-            BindingContext = new ScanPageViewModel(item);
+            BindingContext = new ScanPageViewModel(item, productInfo);
 		}
 	}
 }

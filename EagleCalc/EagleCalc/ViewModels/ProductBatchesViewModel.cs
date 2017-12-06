@@ -20,6 +20,7 @@ namespace EagleCalc.ViewModels
             ProductInfo = productInfo;
 
             RefreshBatchListCommand = new Command(async () => await RefreshBatchList());
+            AddNewBatchCommand = new Command(async () => await AddNewBatch());
 
             MessagingCenter.Subscribe<ScanPageViewModel>(this, "ItemsChanged", async (sender) =>
             {
@@ -33,6 +34,8 @@ namespace EagleCalc.ViewModels
 
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
         public ICommand RefreshBatchListCommand { get; }
+        public ICommand AddNewBatchCommand { get; }
+
         public ProductInfo ProductInfo { get; set; }
 
         ObservableCollection<EagleBatch> batchList = new ObservableCollection<EagleBatch>();
@@ -51,7 +54,7 @@ namespace EagleCalc.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if(selectedItem != null)
                 {
-                    Application.Current.MainPage.Navigation.PushAsync(new Pages.ScanPage(selectedItem));
+                    Application.Current.MainPage.Navigation.PushAsync(new Pages.ScanPage(selectedItem, ProductInfo));
                     selectedItem = null;
                 }
             }
@@ -90,6 +93,26 @@ namespace EagleCalc.ViewModels
                 IsBusy = false;
             }
 
+        }
+
+        async Task AddNewBatch()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new Pages.ScanPage(null, ProductInfo));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Batch not added", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }
