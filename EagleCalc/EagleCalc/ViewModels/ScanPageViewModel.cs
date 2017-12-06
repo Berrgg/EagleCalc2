@@ -10,7 +10,7 @@ namespace EagleCalc.ViewModels
     {
         public ScanPageViewModel(EagleBatch item = null, ProductInfo productInfo = null)
         {
-            Title = productInfo.ProdDescription;
+            Title = productInfo.ProdCode + "/" + DateTime.Now.ToString("ddMMyyHHmmss");
         }
     }
 }
