@@ -18,5 +18,16 @@ namespace EagleCalc.Pages
 			InitializeComponent ();
             BindingContext = new ScanPageViewModel(item, productInfo);
 		}
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            scanText.Focus();
+        }
+
+        private void ScanText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+    }
 }
