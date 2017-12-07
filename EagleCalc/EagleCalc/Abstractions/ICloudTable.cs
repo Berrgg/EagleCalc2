@@ -14,7 +14,7 @@ namespace EagleCalc.Abstractions
         Task<ICollection<T>> ReadAllItemsAsync();
         Task<ICollection<T>> ReadItemsAsync(int start, int count);
         Task<ICollection<T>> ReadProducts(string customer);
-        Task<ICollection<T>> ReadBatchWeightAverage(DateTimeOffset todatDate, string line, string productCode);
+        Task<ICollection<T>> ReadListOfBatches(DateTimeOffset todatDate, string line, string productCode);
       //  Task PullAsync();
     }
 }
