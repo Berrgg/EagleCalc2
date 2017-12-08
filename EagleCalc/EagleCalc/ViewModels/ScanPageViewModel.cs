@@ -6,6 +6,7 @@ using EagleCalc.Models;
 using EagleCalc.Helpers;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Linq;
 using Xamarin.Forms;
 using System.Windows.Input;
 
@@ -79,7 +80,19 @@ namespace EagleCalc.ViewModels
 
         private void CalculateWeightedAverage()
         {
+            var batchItems = new List<EagleBatch>(scanList.GroupBy(x => x.IdBatch)
+                                                                    .Select(group => new EagleBatch
+                                                                    {
+                                                                        IdBatch = group.Key,
+                                                                        Weight = group.Sum(i => i.Weight),
+                                                                        TrayCl = group.Sum(i => i.Weight * i.TrayCl) / group.Sum(i => i.Weight)
+                                                                    }));
 
+            if(batchItems.Count > 0)
+            {
+                PalletWeight = batchItems[0].Weight.ToString("F2");
+                PalletCl = batchItems[0].TrayCl.ToString("F2");
+            }
         }
 
         async Task RefreshBatchList()
