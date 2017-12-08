@@ -12,6 +12,60 @@
             Placeholder="Barcode scan" PlaceholderColor="LightGray"
             TextChanged="ScanText_TextChanged" />
 
+        <AbsoluteLayout BackgroundColor="#333333" AbsoluteLayout.LayoutBounds="0, 50, 1, 50" AbsoluteLayout.LayoutFlags="WidthProportional">
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="25*" />
+                        <ColumnDefinition Width="35*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" 
+                           Text="{Binding palletWeight, StringFormat='Weight: {0}'}" 
+                           VerticalTextAlignment="Center" 
+                           BackgroundColor="#333333" 
+                           TextColor="WhiteSmoke"/>
+                    <Label Grid.Column="1" 
+                           Text="{Binding palletCl, StringFormat='CL: {0}'}" 
+                           VerticalTextAlignment="Center" 
+                           BackgroundColor="#333333" 
+                           TextColor="WhiteSmoke"/>
+                    <Button Grid.Column="2" x:Name="saveBatch" Text="Clear All" Clicked="saveBatch_Clicked" 
+                                BackgroundColor="#cccccc" TextColor="#333333"/>
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+        
+        <AbsoluteLayout BackgroundColor="#333333" AbsoluteLayout.LayoutBounds="0, 110, 1, 90" AbsoluteLayout.LayoutFlags="SizeProportional">
+            <StackLayout VerticalOptions="FillAndExpand" >
+                <ListView IsPullToRefreshEnabled="True"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                          ItemsSource="{Binding ScanList}"
+                          RefreshCommand="{Binding RefreshBatchListCommand}"
+                          HasUnevenRows="True"
+                          SeparatorColor="#cccccc">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="5">
+                                    <Label Text="{Binding TrayId, StringFormat='Tray ID: {0}'}" TextColor="WhiteSmoke"/>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                        <Label Text="{Binding PluCode, StringFormat='Code: {0}'}" TextColor="WhiteSmoke"/>
+                                        <Label Text="{Binding Weight, StringFormat='Weight: {0:F2}'}" TextColor="WhiteSmoke"/>
+                                        <Label Text="{Binding TrayCl, StringFormat= 'CL: {0:F2}'}" TextColor="WhiteSmoke"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Delete"
+                                              Clicked="MenuItem_DeleteClicked"
+                                              IsDestructive="True"
+                                              CommandParameter="{Binding .}"/>
+                                </ViewCell.ContextActions>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </AbsoluteLayout>
     </AbsoluteLayout>
-
 </ContentPage>

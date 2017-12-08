@@ -13,10 +13,11 @@ namespace EagleCalc.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ScanPage : ContentPage
 	{
+        ScanPageViewModel vm;
 		public ScanPage (EagleBatch item = null, ProductInfo productInfo = null)
 		{
 			InitializeComponent ();
-            BindingContext = new ScanPageViewModel(item, productInfo);
+            BindingContext = vm = new ScanPageViewModel(item, productInfo);
 		}
 
         protected override void OnAppearing()
@@ -28,6 +29,12 @@ namespace EagleCalc.Pages
         private void ScanText_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void MenuItem_DeleteClicked(object sender, EventArgs e)
+        {
+            var batchItem = (sender as MenuItem).CommandParameter as EagleBatch;
+            vm.ScanList.Remove(batchItem);
         }
     }
 }
