@@ -35,6 +35,7 @@ namespace EagleCalc.Pages
         {
             var batchItem = (sender as MenuItem).CommandParameter as EagleBatch;
             vm.ScanList.Remove(batchItem);
+            vm.DeleteItemCommand.Execute(null);
         }
     }
 }
