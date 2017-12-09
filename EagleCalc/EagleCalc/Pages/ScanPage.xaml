@@ -30,8 +30,6 @@
                            VerticalTextAlignment="Center" 
                            BackgroundColor="#333333" 
                            TextColor="WhiteSmoke"/>
-                    <Button Grid.Column="2" x:Name="saveBatch" Text="Clear All" Clicked="saveBatch_Clicked" 
-                                BackgroundColor="#cccccc" TextColor="#333333"/>
                 </Grid>
             </StackLayout>
         </AbsoluteLayout>

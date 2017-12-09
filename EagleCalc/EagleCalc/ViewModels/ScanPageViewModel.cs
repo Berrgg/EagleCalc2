@@ -160,7 +160,23 @@ namespace EagleCalc.ViewModels
         {
             if(scanText.Length == 31)
             {
+                BarCodeSplit barCodeSplit = new BarCodeSplit(scanText);
 
+                EagleBatch newItem = new EagleBatch
+                {
+                    IdBatch = IdBatch,
+                    CustomerName = ProductInfo.Customer,
+                    Line = ProductInfo.ProductionLine,
+                    ProductCode = ProductInfo.ProdCode,
+                    TrayId = barCodeSplit.TrayId,
+                    PluCode = barCodeSplit.PluCode,
+                    Weight = barCodeSplit.Weight,
+                    TrayCl = barCodeSplit.TrayCl,
+                    ProductionDate = DateTime.Today,
+                    IsPrinted = false
+                };
+
+                await Task.Run(() => ScanList.Add(newItem));
             }
         }
     }

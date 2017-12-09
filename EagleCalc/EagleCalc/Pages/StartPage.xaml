@@ -31,7 +31,7 @@
             <Button BackgroundColor="#cccccc" TextColor="#333333" 
                     Text="List of batches" 
                     Command="{Binding BatchesPageCommand}"
-                    AbsoluteLayout.LayoutBounds="0.5, 0.5, 100, 50" 
+                    AbsoluteLayout.LayoutBounds="0.5, 0.5, 150, 50" 
                     AbsoluteLayout.LayoutFlags="PositionProportional" />
         </AbsoluteLayout>
     </AbsoluteLayout>
