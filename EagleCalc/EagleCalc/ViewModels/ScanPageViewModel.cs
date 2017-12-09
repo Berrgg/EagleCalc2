@@ -18,6 +18,7 @@ namespace EagleCalc.ViewModels
         {
             RefreshBatchListCommand = new Command(async () => await RefreshBatchList());
             DeleteItemCommand = new Command(async () => await DeleteItemAsync());
+            AddItemCommand = new Command(async () => await AddItem(string.Empty));
 
             ProductInfo = productInfo;
 
@@ -35,6 +36,7 @@ namespace EagleCalc.ViewModels
         public ICloudService CloudService => ServiceLocator.Get<ICloudService>();
         public ICommand RefreshBatchListCommand { get; }
         public ICommand DeleteItemCommand { get; }
+        public ICommand AddItemCommand { get; }
 
         public ProductInfo ProductInfo { get; set; }
         private string IdBatch { get; set; }
@@ -151,6 +153,14 @@ namespace EagleCalc.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        async Task AddItem(string scanText)
+        {
+            if(scanText.Length == 31)
+            {
+
             }
         }
     }
