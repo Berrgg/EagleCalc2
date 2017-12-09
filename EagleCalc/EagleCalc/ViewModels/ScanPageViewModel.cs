@@ -16,11 +16,18 @@ namespace EagleCalc.ViewModels
     {
         public ScanPageViewModel(EagleBatch item = null, ProductInfo productInfo = null)
         {
-            Title = productInfo.ProdCode + "/" + DateTime.Now.ToString("ddMMyyHHmmss");
-            ProductInfo = productInfo;
-
             RefreshBatchListCommand = new Command(async () => await RefreshBatchList());
             DeleteItemCommand = new Command(async () => await DeleteItemAsync());
+
+            ProductInfo = productInfo;
+
+            if(item != null)
+                IdBatch = item.IdBatch;
+            else
+                IdBatch = productInfo.ProdCode + "/" + DateTime.Now.ToString("ddMMyyHHmmss");
+
+            Title = IdBatch;
+            RefreshBatchListCommand.Execute(null);
 
             IsBusy = false;
         }
@@ -30,6 +37,7 @@ namespace EagleCalc.ViewModels
         public ICommand DeleteItemCommand { get; }
 
         public ProductInfo ProductInfo { get; set; }
+        private string IdBatch { get; set; }
 
         EagleBatch currentBatch;
         public EagleBatch CurrentBatch
