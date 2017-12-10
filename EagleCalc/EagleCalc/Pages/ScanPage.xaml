@@ -34,7 +34,7 @@
                 </Grid>
             </StackLayout>
         </AbsoluteLayout>
-        
+
         <AbsoluteLayout BackgroundColor="#333333" AbsoluteLayout.LayoutBounds="0, 110, 1, 90" AbsoluteLayout.LayoutFlags="SizeProportional">
             <StackLayout VerticalOptions="FillAndExpand" >
                 <ListView IsPullToRefreshEnabled="True"
@@ -66,5 +66,20 @@
                 </ListView>
             </StackLayout>
         </AbsoluteLayout>
+
+        <AbsoluteLayout BackgroundColor="#333333" AbsoluteLayout.LayoutBounds="0, 1, 1, 50" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional">
+            <StackLayout>
+                <Grid>
+                    <Button Grid.Column="0" Text="Cancel" x:Name="ButtonCancel" 
+                            Clicked="ButtonCancel_Clicked"
+                            IsEnabled="{Binding ButtonCanceEnabled, Mode=OneWay}"
+                            BackgroundColor="#cccccc" 
+                            TextColor="#333333"/>
+                    <Button Grid.Column="1" Text="Confirm" x:Name="ButtonConfrm" Clicked="ButtonConfrm_Clicked" 
+                            BackgroundColor="#cccccc" TextColor="#333333"/>
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+
     </AbsoluteLayout>
 </ContentPage>

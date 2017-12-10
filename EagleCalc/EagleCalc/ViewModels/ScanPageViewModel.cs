@@ -67,6 +67,13 @@ namespace EagleCalc.ViewModels
             set { SetProperty(ref _scanText, value, "ScanText"); }
         }
 
+        private bool buttonCancelEnabled = false;
+        public bool ButtonCanceEnabled
+        {
+            get { return buttonCancelEnabled; }
+            set { SetProperty(ref buttonCancelEnabled, value, "ButtonCancelEnabled"); }
+        }
+
         string palletWeight;
         public string PalletWeight
         {
@@ -196,7 +203,6 @@ namespace EagleCalc.ViewModels
             finally
             {
                 IsBusy = false;
-                ScanText = string.Empty;
             }
         }
     }

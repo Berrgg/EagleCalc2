@@ -30,9 +30,6 @@ namespace EagleCalc.Pages
         {
             if(scanText.Text.Length == 31)
                 vm.AddItemCommand.Execute(null);
-
-            //scanText.Focus();
-            //scanText.Text = "";
         }
 
         private void MenuItem_DeleteClicked(object sender, EventArgs e)
@@ -41,5 +38,27 @@ namespace EagleCalc.Pages
             vm.ScanList.Remove(batchItem);
             vm.DeleteItemCommand.Execute(null);
         }
+
+        private void ButtonConfrm_Clicked(object sender, EventArgs e)
+        {
+            ResetEntryText();
+          //  ButtonCancelEnabled(false);
+        }
+
+        private void ButtonCancel_Clicked(object sender, EventArgs e)
+        {
+            //RemoveLastItemOnListView();
+            //ResetEntryText();
+            //CalculateWeightedAverage();
+            //ButtonCancelEnabled(false);
+        }
+
+
+        private void ResetEntryText()
+        {
+            scanText.Focus();
+            scanText.Text = "";
+        }
+
     }
 }
