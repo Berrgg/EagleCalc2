@@ -10,6 +10,7 @@
             x:Name="scanText"
             AbsoluteLayout.LayoutBounds="0, 0, 1, 50" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
             Placeholder="Barcode scan" PlaceholderColor="LightGray"
+            Text="{Binding ScanText, Mode=TwoWay}"
             TextChanged="ScanText_TextChanged" />
 
         <AbsoluteLayout BackgroundColor="#333333" AbsoluteLayout.LayoutBounds="0, 50, 1, 50" AbsoluteLayout.LayoutFlags="WidthProportional">
@@ -21,12 +22,12 @@
                         <ColumnDefinition Width="35*" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" 
-                           Text="{Binding palletWeight, StringFormat='Weight: {0}'}" 
+                           Text="{Binding PalletWeight, StringFormat='Weight: {0}'}" 
                            VerticalTextAlignment="Center" 
                            BackgroundColor="#333333" 
                            TextColor="WhiteSmoke"/>
                     <Label Grid.Column="1" 
-                           Text="{Binding palletCl, StringFormat='CL: {0}'}" 
+                           Text="{Binding PalletCl, StringFormat='CL: {0}'}" 
                            VerticalTextAlignment="Center" 
                            BackgroundColor="#333333" 
                            TextColor="WhiteSmoke"/>

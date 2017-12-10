@@ -18,7 +18,7 @@ namespace EagleCalc.ViewModels
         {
             RefreshBatchListCommand = new Command(async () => await RefreshBatchList());
             DeleteItemCommand = new Command(async () => await DeleteItemAsync());
-            AddItemCommand = new Command(async () => await AddItem(string.Empty));
+            AddItemCommand = new Command(async () => await AddItem());
 
             ProductInfo = productInfo;
 
@@ -58,6 +58,13 @@ namespace EagleCalc.ViewModels
                 if (scanList.Count > 0)
                     CalculateWeightedAverage();
             }
+        }
+
+        private string _scanText = string.Empty;
+        public string ScanText
+        {
+            get { return _scanText; }
+            set { SetProperty(ref _scanText, value, "ScanText"); }
         }
 
         string palletWeight;
@@ -156,11 +163,15 @@ namespace EagleCalc.ViewModels
             }
         }
 
-        async Task AddItem(string scanText)
+        async Task AddItem()
         {
-            if(scanText.Length == 31)
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
             {
-                BarCodeSplit barCodeSplit = new BarCodeSplit(scanText);
+                BarCodeSplit barCodeSplit = new BarCodeSplit(ScanText);
 
                 EagleBatch newItem = new EagleBatch
                 {
@@ -177,6 +188,15 @@ namespace EagleCalc.ViewModels
                 };
 
                 await Task.Run(() => ScanList.Add(newItem));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Scan pallet failed", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+                ScanText = string.Empty;
             }
         }
     }

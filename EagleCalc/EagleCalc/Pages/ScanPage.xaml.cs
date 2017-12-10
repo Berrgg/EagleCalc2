@@ -28,7 +28,11 @@ namespace EagleCalc.Pages
 
         private void ScanText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            vm.AddItemCommand.Execute(scanText.Text);
+            if(scanText.Text.Length == 31)
+                vm.AddItemCommand.Execute(null);
+
+            //scanText.Focus();
+            //scanText.Text = "";
         }
 
         private void MenuItem_DeleteClicked(object sender, EventArgs e)
