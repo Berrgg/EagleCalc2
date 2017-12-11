@@ -178,23 +178,29 @@ namespace EagleCalc.ViewModels
             {
                 BarCodeSplit barCodeSplit = new BarCodeSplit(ScanText);
 
-                var newItem = new EagleBatch
+                if (IsPalletScanned(ScanList, barCodeSplit.TrayId))
                 {
-                    IdBatch = IdBatch,
-                    ProductCode = ProductInfo.ProdCode,
-                    Line = ProductInfo.ProductionLine,
-                    TrayId = barCodeSplit.TrayId,
-                    PluCode = barCodeSplit.PluCode,
-                    Weight = barCodeSplit.Weight,
-                    TrayCl = barCodeSplit.TrayCl,
-                    ProductionDate = new DateTimeOffset(2017, 12, 10, 0, 0, 0, new TimeSpan(0, 0, 0)),
-                    IsPrinted = false
-                };
+                    await App.Current.MainPage.DisplayAlert("Scanner", "Pallet already scanned.", "OK");
+                }
+                else
+                {
+                    var newItem = new EagleBatch
+                    {
+                        IdBatch = IdBatch,
+                        ProductCode = ProductInfo.ProdCode,
+                        Line = ProductInfo.ProductionLine,
+                        TrayId = barCodeSplit.TrayId,
+                        PluCode = barCodeSplit.PluCode,
+                        Weight = barCodeSplit.Weight,
+                        TrayCl = barCodeSplit.TrayCl,
+                        ProductionDate = DateTimeOffset.Now.Date,
+                        IsPrinted = false
+                    };
 
-                ScanList.Add(newItem);
-                CurrentBatch = newItem;
-                CalculateWeightedAverage();
-                //await Task.Run(() => ScanList.Add(newItem));
+                    ScanList.Add(newItem);
+                    CurrentBatch = newItem;
+                    CalculateWeightedAverage();
+                }
             }
             catch (Exception ex)
             {
@@ -218,10 +224,6 @@ namespace EagleCalc.ViewModels
                 var table = CloudService.GetTable<EagleBatch>();
                 await table.UpsertItemAsync(CurrentBatch);
                 MessagingCenter.Send<ScanPageViewModel>(this, "ItemsChanged");
-
-                //var table = CloudService.GetTable<Line>();
-                //var newItem = new Line { LineName = "EK Line1" };
-                //await table.UpsertItemAsync(newItem);
             }
             catch (Exception ex)
             {
@@ -231,6 +233,16 @@ namespace EagleCalc.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private bool IsPalletScanned(ObservableCollection<EagleBatch> batchList, string trayId)
+        {
+            ObservableCollection<EagleBatch> list = new ObservableCollection<EagleBatch>(batchList.Where(x => x.TrayId == trayId));
+
+            if (list.Count >= 1)
+                return true;
+            else
+                return false;
         }
     }
 }

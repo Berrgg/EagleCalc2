@@ -3,6 +3,6 @@ namespace EagleCalc.Models
 {
     public class Customer : TableData
     {
-        new public string CustomerName { get; set; }
+        public string CustomerName { get; set; }
     }
 }
