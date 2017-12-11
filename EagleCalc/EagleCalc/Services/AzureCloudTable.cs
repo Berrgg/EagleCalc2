@@ -13,10 +13,14 @@ namespace EagleCalc.Services
     {
         //IMobileServiceSyncTable<T> table;
         IMobileServiceTable<T> table;
+        IMobileServiceTable<Product> productTable;
+        IMobileServiceTable<EagleBatch> batchTable;
 
         public AzureCloudTable(MobileServiceClient client)
         {
             table = client.GetTable<T>();
+            productTable = client.GetTable<Product>();
+            batchTable = client.GetTable<EagleBatch>();
         }
 
         #region ICloudTable implementation
@@ -43,14 +47,14 @@ namespace EagleCalc.Services
             return await table.ToListAsync();
         }
 
-        public async Task<ICollection<T>> ReadProducts(string customer)
+        public async Task<ICollection<Product>> ReadProducts(string customer)
         {
-            return await table.Where(x => x.CustomerName == customer).ToListAsync();
+            return await productTable.Where(x => x.CustomerName == customer).ToListAsync();
         }
 
-        public async Task<ICollection<T>> ReadListOfBatches(DateTimeOffset todatDate, string line, string productCode)
+        public async Task<ICollection<EagleBatch>> ReadListOfBatches(DateTimeOffset todatDate, string line, string productCode)
         {
-            return await table.Where(x => x.ProductionDate == todatDate && x.Line == line && x.ProductCode == productCode).ToListAsync();
+            return await batchTable.Where(x => x.ProductionDate == todatDate && x.Line == line && x.ProductCode == productCode).ToListAsync();
         }
 
         //public async Task<ICollection<T>> ReadAllItemsAsync()

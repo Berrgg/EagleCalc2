@@ -8,9 +8,5 @@ namespace EagleCalc.Abstractions
         public DateTimeOffset? UpdatedAt { get; set; }
         public DateTimeOffset? CreatedAt { get; set; }
         public byte[] Version { get; set; }
-        public string CustomerName { get; set; }
-        public string Line { get; set; }
-        public DateTimeOffset ProductionDate { get; set; }
-        public string ProductCode { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EagleCalc.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,8 +14,8 @@ namespace EagleCalc.Abstractions
         Task DeleteItemAsync(T item);
         Task<ICollection<T>> ReadAllItemsAsync();
         Task<ICollection<T>> ReadItemsAsync(int start, int count);
-        Task<ICollection<T>> ReadProducts(string customer);
-        Task<ICollection<T>> ReadListOfBatches(DateTimeOffset todatDate, string line, string productCode);
+        Task<ICollection<Product>> ReadProducts(string customer);
+        Task<ICollection<EagleBatch>> ReadListOfBatches(DateTimeOffset todatDate, string line, string productCode);
       //  Task PullAsync();
     }
 }

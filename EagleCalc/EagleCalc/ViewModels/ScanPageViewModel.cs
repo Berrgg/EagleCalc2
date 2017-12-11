@@ -215,16 +215,13 @@ namespace EagleCalc.ViewModels
 
             try
             {
-                //var table = CloudService.GetTable<EagleBatch>();
-                //await table.UpsertItemAsync(CurrentBatch);
-                //MessagingCenter.Send<ScanPageViewModel>(this, "ItemsChanged");
+                var table = CloudService.GetTable<EagleBatch>();
+                await table.UpsertItemAsync(CurrentBatch);
+                MessagingCenter.Send<ScanPageViewModel>(this, "ItemsChanged");
 
-                var table = CloudService.GetTable<Line>();
-
-                var newItem = new Line();
-                newItem.LineName = "EK Line1";
-
-                await table.UpsertItemAsync(newItem);
+                //var table = CloudService.GetTable<Line>();
+                //var newItem = new Line { LineName = "EK Line1" };
+                //await table.UpsertItemAsync(newItem);
             }
             catch (Exception ex)
             {
