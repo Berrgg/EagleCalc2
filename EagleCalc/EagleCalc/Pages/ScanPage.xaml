@@ -22,12 +22,12 @@
                         <ColumnDefinition Width="35*" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" 
-                           Text="{Binding PalletWeight, StringFormat='Weight: {0}'}" 
+                           Text="{Binding PalletWeight, Mode=OneWay, StringFormat='Weight: {0}'}" 
                            VerticalTextAlignment="Center" 
                            BackgroundColor="#333333" 
                            TextColor="WhiteSmoke"/>
                     <Label Grid.Column="1" 
-                           Text="{Binding PalletCl, StringFormat='CL: {0}'}" 
+                           Text="{Binding PalletCl, Mode=OneWay, StringFormat='CL: {0}'}" 
                            VerticalTextAlignment="Center" 
                            BackgroundColor="#333333" 
                            TextColor="WhiteSmoke"/>
@@ -72,7 +72,7 @@
                 <Grid>
                     <Button Grid.Column="0" Text="Cancel" x:Name="ButtonCancel" 
                             Clicked="ButtonCancel_Clicked"
-                            IsEnabled="{Binding ButtonCanceEnabled, Mode=OneWay}"
+                            IsEnabled="{Binding ButtonCancelEnabled, Mode=OneWay}"
                             BackgroundColor="#cccccc" 
                             TextColor="#333333"/>
                     <Button Grid.Column="1" Text="Confirm" x:Name="ButtonConfrm" Clicked="ButtonConfrm_Clicked" 

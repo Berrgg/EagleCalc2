@@ -19,6 +19,7 @@ namespace EagleCalc.ViewModels
             RefreshBatchListCommand = new Command(async () => await RefreshBatchList());
             DeleteItemCommand = new Command(async () => await DeleteItemAsync());
             AddItemCommand = new Command(async () => await AddItem());
+            SaveItemCommand = new Command(async () => await SaveItemAsync());
 
             ProductInfo = productInfo;
 
@@ -37,6 +38,7 @@ namespace EagleCalc.ViewModels
         public ICommand RefreshBatchListCommand { get; }
         public ICommand DeleteItemCommand { get; }
         public ICommand AddItemCommand { get; }
+        public ICommand SaveItemCommand { get; }
 
         public ProductInfo ProductInfo { get; set; }
         private string IdBatch { get; set; }
@@ -52,12 +54,7 @@ namespace EagleCalc.ViewModels
         public ObservableCollection<EagleBatch> ScanList
         {
             get { return scanList; }
-            set
-            {
-                SetProperty(ref scanList, value, "ScanList");
-                if (scanList.Count > 0)
-                    CalculateWeightedAverage();
-            }
+            set { SetProperty(ref scanList, value, "ScanList"); }
         }
 
         private string _scanText = string.Empty;
@@ -68,7 +65,7 @@ namespace EagleCalc.ViewModels
         }
 
         private bool buttonCancelEnabled = false;
-        public bool ButtonCanceEnabled
+        public bool ButtonCancelEnabled
         {
             get { return buttonCancelEnabled; }
             set { SetProperty(ref buttonCancelEnabled, value, "ButtonCancelEnabled"); }
@@ -157,6 +154,7 @@ namespace EagleCalc.ViewModels
                 {
                     var table = CloudService.GetTable<EagleBatch>();
                     await table.DeleteItemAsync(CurrentBatch);
+                    CalculateWeightedAverage();
                     MessagingCenter.Send<ScanPageViewModel>(this, "ItemsChanged");
                 }
             }
@@ -180,25 +178,57 @@ namespace EagleCalc.ViewModels
             {
                 BarCodeSplit barCodeSplit = new BarCodeSplit(ScanText);
 
-                EagleBatch newItem = new EagleBatch
+                var newItem = new EagleBatch
                 {
                     IdBatch = IdBatch,
-                    CustomerName = ProductInfo.Customer,
-                    Line = ProductInfo.ProductionLine,
                     ProductCode = ProductInfo.ProdCode,
+                    Line = ProductInfo.ProductionLine,
                     TrayId = barCodeSplit.TrayId,
                     PluCode = barCodeSplit.PluCode,
                     Weight = barCodeSplit.Weight,
                     TrayCl = barCodeSplit.TrayCl,
-                    ProductionDate = DateTime.Today,
+                    ProductionDate = new DateTimeOffset(2017, 12, 10, 0, 0, 0, new TimeSpan(0, 0, 0)),
                     IsPrinted = false
                 };
 
-                await Task.Run(() => ScanList.Add(newItem));
+                ScanList.Add(newItem);
+                CurrentBatch = newItem;
+                CalculateWeightedAverage();
+                //await Task.Run(() => ScanList.Add(newItem));
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Scan pallet failed", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+                ButtonCancelEnabled = true;
+            }
+        }
+
+        async Task SaveItemAsync()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
+            {
+                //var table = CloudService.GetTable<EagleBatch>();
+                //await table.UpsertItemAsync(CurrentBatch);
+                //MessagingCenter.Send<ScanPageViewModel>(this, "ItemsChanged");
+
+                var table = CloudService.GetTable<Line>();
+
+                var newItem = new Line();
+                newItem.LineName = "EK Line1";
+
+                await table.UpsertItemAsync(newItem);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Save into database failed", ex.Message, "OK");
             }
             finally
             {

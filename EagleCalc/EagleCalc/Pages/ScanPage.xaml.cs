@@ -36,13 +36,15 @@ namespace EagleCalc.Pages
         {
             var batchItem = (sender as MenuItem).CommandParameter as EagleBatch;
             vm.ScanList.Remove(batchItem);
+            vm.CurrentBatch = batchItem;
             vm.DeleteItemCommand.Execute(null);
         }
 
         private void ButtonConfrm_Clicked(object sender, EventArgs e)
         {
+            vm.SaveItemCommand.Execute(null);
             ResetEntryText();
-          //  ButtonCancelEnabled(false);
+            vm.ButtonCancelEnabled = false;
         }
 
         private void ButtonCancel_Clicked(object sender, EventArgs e)
