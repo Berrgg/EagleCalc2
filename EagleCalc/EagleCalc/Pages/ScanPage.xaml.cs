@@ -42,18 +42,19 @@ namespace EagleCalc.Pages
 
         private void ButtonConfrm_Clicked(object sender, EventArgs e)
         {
-            vm.SaveItemCommand.Execute(null);
+            if (!vm.IsScanned)
+                vm.SaveItemCommand.Execute(null);
+
             ResetEntryText();
+            vm.IsScanned = false;
             vm.ButtonCancelEnabled = false;
             vm.ButtonConfirmEnabled = false;
         }
 
         private void ButtonCancel_Clicked(object sender, EventArgs e)
         {
-            //RemoveLastItemOnListView();
-            //ResetEntryText();
-            //CalculateWeightedAverage();
-            //ButtonCancelEnabled(false);
+            vm.RemoveLastItemCommand.Execute(null);
+            ResetEntryText();
         }
 
 

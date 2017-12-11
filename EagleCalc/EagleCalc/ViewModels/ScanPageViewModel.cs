@@ -20,6 +20,7 @@ namespace EagleCalc.ViewModels
             DeleteItemCommand = new Command(async () => await DeleteItemAsync());
             AddItemCommand = new Command(async () => await AddItem());
             SaveItemCommand = new Command(async () => await SaveItemAsync());
+            RemoveLastItemCommand = new Command(async () => await RemoveLastItem());
 
             ProductInfo = productInfo;
 
@@ -39,6 +40,7 @@ namespace EagleCalc.ViewModels
         public ICommand DeleteItemCommand { get; }
         public ICommand AddItemCommand { get; }
         public ICommand SaveItemCommand { get; }
+        public ICommand RemoveLastItemCommand { get; }
 
         public ProductInfo ProductInfo { get; set; }
         private string IdBatch { get; set; }
@@ -77,6 +79,8 @@ namespace EagleCalc.ViewModels
             get { return buttonConfirmEnabled; }
             set { SetProperty(ref buttonConfirmEnabled, value, "ButtonConfirmEnabled"); }
         }
+
+        public bool IsScanned { get; set; } = false;
 
         string palletWeight;
         public string PalletWeight
@@ -189,7 +193,10 @@ namespace EagleCalc.ViewModels
 
                 if (IsPalletScanned(ScanList, barCodeSplit.TrayId))
                 {
-                    await App.Current.MainPage.DisplayAlert("Scanner", "Pallet already scanned.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Scanner", "Pallet already scanned.", "OK");
+                    IsScanned = true;
+                    ButtonCancelEnabled = false;
+                    ButtonConfirmEnabled = true;
                 }
                 else
                 {
@@ -209,6 +216,8 @@ namespace EagleCalc.ViewModels
                     ScanList.Add(newItem);
                     CurrentBatch = newItem;
                     CalculateWeightedAverage();
+                    ButtonCancelEnabled = true;
+                    ButtonConfirmEnabled = true;
                 }
             }
             catch (Exception ex)
@@ -218,8 +227,24 @@ namespace EagleCalc.ViewModels
             finally
             {
                 IsBusy = false;
-                ButtonCancelEnabled = true;
-                ButtonConfirmEnabled = true;
+            }
+        }
+
+        async Task RemoveLastItem()
+        {
+            try
+            {
+                if (ScanList.Count > 0)
+                    ScanList.RemoveAt(ScanList.Count - 1);
+
+                CalculateWeightedAverage();
+
+                ButtonCancelEnabled = false;
+                ButtonConfirmEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Cancel last scan failed.", ex.Message, "OK");
             }
         }
 

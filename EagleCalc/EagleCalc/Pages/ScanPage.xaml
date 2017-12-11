@@ -17,9 +17,8 @@
             <StackLayout>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40*" />
-                        <ColumnDefinition Width="25*" />
-                        <ColumnDefinition Width="35*" />
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Margin="20, 0, 0, 0"
                            Text="{Binding PalletWeight, Mode=OneWay, StringFormat='Weight: {0}'}" 
