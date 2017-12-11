@@ -13,7 +13,7 @@
             Text="{Binding ScanText, Mode=TwoWay}"
             TextChanged="ScanText_TextChanged" />
 
-        <AbsoluteLayout BackgroundColor="#333333" AbsoluteLayout.LayoutBounds="0, 50, 1, 50" AbsoluteLayout.LayoutFlags="WidthProportional">
+        <AbsoluteLayout BackgroundColor="#cccccc" AbsoluteLayout.LayoutBounds="0, 50, 1, 50" AbsoluteLayout.LayoutFlags="WidthProportional">
             <StackLayout>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -21,16 +21,14 @@
                         <ColumnDefinition Width="25*" />
                         <ColumnDefinition Width="35*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" 
+                    <Label Grid.Column="0" Margin="20, 0, 0, 0"
                            Text="{Binding PalletWeight, Mode=OneWay, StringFormat='Weight: {0}'}" 
                            VerticalTextAlignment="Center" 
-                           BackgroundColor="#333333" 
-                           TextColor="WhiteSmoke"/>
-                    <Label Grid.Column="1" 
+                           TextColor="#333333"/>
+                    <Label Grid.Column="1" Margin="20, 0, 0, 0"
                            Text="{Binding PalletCl, Mode=OneWay, StringFormat='CL: {0}'}" 
                            VerticalTextAlignment="Center" 
-                           BackgroundColor="#333333" 
-                           TextColor="WhiteSmoke"/>
+                           TextColor="#333333"/>
                 </Grid>
             </StackLayout>
         </AbsoluteLayout>
@@ -75,8 +73,11 @@
                             IsEnabled="{Binding ButtonCancelEnabled, Mode=OneWay}"
                             BackgroundColor="#cccccc" 
                             TextColor="#333333"/>
-                    <Button Grid.Column="1" Text="Confirm" x:Name="ButtonConfrm" Clicked="ButtonConfrm_Clicked" 
-                            BackgroundColor="#cccccc" TextColor="#333333"/>
+                    <Button Grid.Column="1" Text="Confirm" x:Name="ButtonConfrm" 
+                            Clicked="ButtonConfrm_Clicked"
+                            IsEnabled="{Binding ButtonConfirmEnabled, Mode=OneWay}"
+                            BackgroundColor="#cccccc" 
+                            TextColor="#333333"/>
                 </Grid>
             </StackLayout>
         </AbsoluteLayout>

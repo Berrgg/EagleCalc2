@@ -71,6 +71,13 @@ namespace EagleCalc.ViewModels
             set { SetProperty(ref buttonCancelEnabled, value, "ButtonCancelEnabled"); }
         }
 
+        private bool buttonConfirmEnabled = false;
+        public bool ButtonConfirmEnabled
+        {
+            get { return buttonConfirmEnabled; }
+            set { SetProperty(ref buttonConfirmEnabled, value, "ButtonConfirmEnabled"); }
+        }
+
         string palletWeight;
         public string PalletWeight
         {
@@ -131,6 +138,8 @@ namespace EagleCalc.ViewModels
 
                 foreach (var item in list)
                     ScanList.Add(item);
+
+                CalculateWeightedAverage();
             }
             catch (Exception ex)
             {
@@ -210,6 +219,7 @@ namespace EagleCalc.ViewModels
             {
                 IsBusy = false;
                 ButtonCancelEnabled = true;
+                ButtonConfirmEnabled = true;
             }
         }
 

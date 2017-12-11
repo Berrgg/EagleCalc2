@@ -45,6 +45,7 @@ namespace EagleCalc.Pages
             vm.SaveItemCommand.Execute(null);
             ResetEntryText();
             vm.ButtonCancelEnabled = false;
+            vm.ButtonConfirmEnabled = false;
         }
 
         private void ButtonCancel_Clicked(object sender, EventArgs e)
