@@ -207,6 +207,9 @@
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\eagle.png" />
+  </ItemGroup>
   <Import Project="..\EagleCalc\EagleCalc.projitems" Label="Shared" Condition="Exists('..\EagleCalc\EagleCalc.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
