@@ -82,7 +82,8 @@ namespace EagleCalc.ViewModels
                                                                             IdBatch = group.Key,
                                                                             Weight = group.Sum(i => i.Weight),
                                                                             TrayCl = group.Sum(i => i.Weight * i.TrayCl) / group.Sum(i => i.Weight)
-                                                                        }));
+                                                                        })
+                                                                        .OrderBy(group => group.IdBatch));
             }
             catch (Exception ex)
             {

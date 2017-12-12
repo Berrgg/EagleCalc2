@@ -57,6 +57,11 @@ namespace EagleCalc.Services
             return await batchTable.Where(x => x.ProductionDate == todatDate && x.Line == line && x.ProductCode == productCode).ToListAsync();
         }
 
+        public async Task<ICollection<EagleBatch>> ReadListOfPallets(string batch)
+        {
+            return await batchTable.Where(x => x.IdBatch == batch).ToListAsync();
+        }
+
         //public async Task<ICollection<T>> ReadAllItemsAsync()
         //{
         //    List<T> allItems = new List<T>();

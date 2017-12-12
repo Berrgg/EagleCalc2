@@ -27,7 +27,10 @@ namespace EagleCalc.ViewModels
             if(item != null)
                 IdBatch = item.IdBatch;
             else
+            {
                 IdBatch = productInfo.ProdCode + "/" + DateTime.Now.ToString("ddMMyyHHmmss");
+                ScanList = new ObservableCollection<EagleBatch>();
+            }
 
             Title = IdBatch;
             RefreshBatchListCommand.Execute(null);
@@ -136,7 +139,7 @@ namespace EagleCalc.ViewModels
             try
             {
                 var table = CloudService.GetTable<EagleBatch>();
-                var list = await table.ReadListOfBatches(DateTime.Today, ProductInfo.ProductionLine, ProductInfo.ProdCode);
+                var list = await table.ReadListOfPallets(IdBatch);
 
                 ScanList.Clear();
 
