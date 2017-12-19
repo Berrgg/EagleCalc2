@@ -108,6 +108,10 @@ namespace EagleCalc.ViewModels
 
             try
             {
+                LineNames.Clear();
+                Customers.Clear();
+                Products.Clear();
+
                 var table = CloudService.GetTable<Line>();
                 var list = await table.ReadAllItemsAsync();
 
