@@ -138,7 +138,7 @@ namespace EagleCalc.ViewModels
 
             try
             {
-                var table = CloudService.GetTable<EagleBatch>();
+                var table = await CloudService.GetTableAsync<EagleBatch>();
                 var list = await table.ReadListOfPallets(IdBatch);
 
                 ScanList.Clear();
@@ -168,7 +168,7 @@ namespace EagleCalc.ViewModels
             {
                 if(CurrentBatch != null)
                 {
-                    var table = CloudService.GetTable<EagleBatch>();
+                    var table = await CloudService.GetTableAsync<EagleBatch>();
                     await table.DeleteItemAsync(CurrentBatch);
                     CalculateWeightedAverage();
                     MessagingCenter.Send<ScanPageViewModel>(this, "ItemsChanged");
@@ -259,7 +259,7 @@ namespace EagleCalc.ViewModels
 
             try
             {
-                var table = CloudService.GetTable<EagleBatch>();
+                var table = await CloudService.GetTableAsync<EagleBatch>();
                 await table.UpsertItemAsync(CurrentBatch);
                 MessagingCenter.Send<ScanPageViewModel>(this, "ItemsChanged");
             }

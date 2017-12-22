@@ -14,13 +14,13 @@ namespace EagleCalc.Services
         //IMobileServiceSyncTable<T> table;
         IMobileServiceTable<T> table;
         IMobileServiceTable<Product> productTable;
-        IMobileServiceTable<EagleBatch> batchTable;
+        IMobileServiceSyncTable<EagleBatch> batchTable;
 
         public AzureCloudTable(MobileServiceClient client)
         {
             table = client.GetTable<T>();
             productTable = client.GetTable<Product>();
-            batchTable = client.GetTable<EagleBatch>();
+            batchTable = client.GetSyncTable<EagleBatch>();
         }
 
         #region ICloudTable implementation
@@ -36,11 +36,11 @@ namespace EagleCalc.Services
             await table.DeleteAsync(item);
         }
 
-        //public async Task PullAsync()
-        //{
-        //    string queryName = $"incsync_{typeof(T).Name}";
-        //    await table.PullAsync(queryName, table.CreateQuery());
-        //}
+        public async Task PullAsync()
+        {
+            string queryName = $"incsync_{typeof(T).Name}";
+            await batchTable.PullAsync(queryName, table.CreateQuery());
+        }
 
         public async Task<ICollection<T>> ReadAllItemsAsync()
         {
