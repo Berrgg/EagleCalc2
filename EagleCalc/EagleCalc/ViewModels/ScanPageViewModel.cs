@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using EagleCalc.Abstractions;
 using EagleCalc.Models;
 using EagleCalc.Helpers;
@@ -138,6 +137,7 @@ namespace EagleCalc.ViewModels
 
             try
             {
+                await CloudService.SyncOfflineCacheAsync();
                 var table = await CloudService.GetTableAsync<EagleBatch>();
                 var list = await table.ReadListOfPallets(IdBatch);
 
@@ -166,11 +166,13 @@ namespace EagleCalc.ViewModels
 
             try
             {
+
                 if(CurrentBatch != null)
                 {
                     var table = await CloudService.GetTableAsync<EagleBatch>();
                     await table.DeleteItemAsync(CurrentBatch);
                     CalculateWeightedAverage();
+                    await CloudService.SyncOfflineCacheAsync();
                     MessagingCenter.Send<ScanPageViewModel>(this, "ItemsChanged");
                 }
             }
@@ -261,6 +263,7 @@ namespace EagleCalc.ViewModels
             {
                 var table = await CloudService.GetTableAsync<EagleBatch>();
                 await table.UpsertItemAsync(CurrentBatch);
+                await CloudService.SyncOfflineCacheAsync();
                 MessagingCenter.Send<ScanPageViewModel>(this, "ItemsChanged");
             }
             catch (Exception ex)

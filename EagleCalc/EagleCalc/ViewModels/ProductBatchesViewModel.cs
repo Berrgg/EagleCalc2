@@ -68,6 +68,7 @@ namespace EagleCalc.ViewModels
 
             try
             {
+                await CloudService.SyncOfflineCacheAsync();
                 var table = await CloudService.GetTableAsync<EagleBatch>();
                 var list = await table.ReadListOfBatches(DateTime.Today, ProductInfo.ProductionLine, ProductInfo.ProdCode);
                 BatchList.Clear();

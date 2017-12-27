@@ -18,5 +18,6 @@ namespace EagleCalc.Abstractions
         Task<ICollection<EagleBatch>> ReadListOfBatches(DateTimeOffset todatDate, string line, string productCode);
         Task<ICollection<EagleBatch>> ReadListOfPallets(string batchId);
         Task PullAsync();
+        Task PullAsyncBatch();
     }
 }

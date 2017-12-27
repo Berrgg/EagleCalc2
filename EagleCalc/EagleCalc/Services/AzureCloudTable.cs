@@ -12,14 +12,14 @@ namespace EagleCalc.Services
     public class AzureCloudTable<T> : ICloudTable<T> where T : TableData
     {
         //IMobileServiceSyncTable<T> table;
-        IMobileServiceTable<T> table;
-        IMobileServiceTable<Product> productTable;
+        IMobileServiceSyncTable<T> table;
+        IMobileServiceSyncTable<Product> productTable;
         IMobileServiceSyncTable<EagleBatch> batchTable;
 
         public AzureCloudTable(MobileServiceClient client)
         {
-            table = client.GetTable<T>();
-            productTable = client.GetTable<Product>();
+            table = client.GetSyncTable<T>();
+            productTable = client.GetSyncTable<Product>();
             batchTable = client.GetSyncTable<EagleBatch>();
         }
 
@@ -39,13 +39,20 @@ namespace EagleCalc.Services
         public async Task PullAsync()
         {
             string queryName = $"incsync_{typeof(T).Name}";
-            await batchTable.PullAsync(queryName, table.CreateQuery());
+            await table.PullAsync(queryName, table.CreateQuery());
         }
 
-        public async Task<ICollection<T>> ReadAllItemsAsync()
+        public async Task PullAsyncBatch()
         {
-            return await table.ToListAsync();
+          //  string queryName = $"incsync_{typeof(T).Name}";
+            await batchTable.PullAsync("allBatches", batchTable.CreateQuery());
         }
+
+
+        //public async Task<ICollection<T>> ReadAllItemsAsync()
+        //{
+        //    return await table.ToListAsync();
+        //}
 
         public async Task<ICollection<Product>> ReadProducts(string customer)
         {
@@ -62,27 +69,27 @@ namespace EagleCalc.Services
             return await batchTable.Where(x => x.IdBatch == batch).ToListAsync();
         }
 
-        //public async Task<ICollection<T>> ReadAllItemsAsync()
-        //{
-        //    List<T> allItems = new List<T>();
+        public async Task<ICollection<T>> ReadAllItemsAsync()
+        {
+            List<T> allItems = new List<T>();
 
-        //    var pageSize = 50;
-        //    var hasMore = true;
+            var pageSize = 50;
+            var hasMore = true;
 
-        //    while (hasMore)
-        //    {
-        //        var pageOfItems = await table.Skip(allItems.Count).Take(pageSize).ToListAsync();
-        //        if (pageOfItems.Count > 0)
-        //        {
-        //            allItems.AddRange(pageOfItems);
-        //        }
-        //        else
-        //        {
-        //            hasMore = false;
-        //        }
-        //    }
-        //    return allItems;
-        //}
+            while (hasMore)
+            {
+                var pageOfItems = await table.Skip(allItems.Count).Take(pageSize).ToListAsync();
+                if (pageOfItems.Count > 0)
+                {
+                    allItems.AddRange(pageOfItems);
+                }
+                else
+                {
+                    hasMore = false;
+                }
+            }
+            return allItems;
+        }
 
         public async Task<T> ReadItemAsync(string id)
         {

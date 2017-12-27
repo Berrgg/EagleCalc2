@@ -112,7 +112,7 @@ namespace EagleCalc.ViewModels
                 Customers.Clear();
                 Products.Clear();
 
-                var table = CloudService.GetTable<Line>();
+                var table = await CloudService.GetTableAsync<Line>();
                 var list = await table.ReadAllItemsAsync();
 
                 foreach (var item in list)
@@ -120,7 +120,7 @@ namespace EagleCalc.ViewModels
 
                 LineNames = new ObservableCollection<string>(LineNames.OrderBy(i => i));
 
-                var tblCustomer = CloudService.GetTable<Customer>();
+                var tblCustomer = await CloudService.GetTableAsync<Customer>();
                 var listCustomer = await tblCustomer.ReadAllItemsAsync();
 
                 foreach (var itemCust in listCustomer)
@@ -146,7 +146,7 @@ namespace EagleCalc.ViewModels
 
             try
             {
-                var table1 = CloudService.GetTable<Product>();
+                var table1 = await CloudService.GetTableAsync<Product>();
                 _products = await table1.ReadProducts(CustomerName);
 
                 Products.Clear();

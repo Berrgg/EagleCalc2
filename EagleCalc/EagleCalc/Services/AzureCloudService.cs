@@ -23,10 +23,10 @@ namespace EagleCalc.Services
             return new AzureCloudTable<T>(Client);
         }
 
-        public ICloudTable<T> GetTable<T>() where T : TableData
-        {
-            return new AzureCloudTable<T>(Client);
-        }
+        //public ICloudTable<T> GetTable<T>() where T : TableData
+        //{
+        //    return new AzureCloudTable<T>(Client);
+        //}
 
         #region Offline sync
         async Task InitializeAsync()
@@ -36,9 +36,12 @@ namespace EagleCalc.Services
 
             var store = new MobileServiceSQLiteStore("offlineEagle.db");
             store.DefineTable<EagleBatch>();
+            store.DefineTable<Line>();
+            store.DefineTable<Customer>();
+            store.DefineTable<Product>();
 
             await Client.SyncContext.InitializeAsync(store);
-            //await SyncOfflineCacheAsync();
+            await SyncOfflineCacheAsync();
         }
 
         public async Task SyncOfflineCacheAsync()
@@ -47,8 +50,10 @@ namespace EagleCalc.Services
 
             await Client.SyncContext.PushAsync();
 
-            var taskTable = await GetTableAsync<EagleBatch>();
-            await taskTable.PullAsync();
+            var lineTable = await GetTableAsync<Line>(); await lineTable.PullAsync();
+            var customerTable = await GetTableAsync<Customer>(); await customerTable.PullAsync();
+            var productTable = await GetTableAsync<Product>(); await productTable.PullAsync();
+            var taskTable = await GetTableAsync<EagleBatch>(); await taskTable.PullAsyncBatch();
         }
         #endregion
 
