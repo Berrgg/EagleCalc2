@@ -14,8 +14,9 @@
             TextChanged="ScanText_TextChanged" />
 
         <AbsoluteLayout BackgroundColor="#cccccc" AbsoluteLayout.LayoutBounds="0, 50, 1, 50" AbsoluteLayout.LayoutFlags="WidthProportional">
-            <StackLayout>
-                <Grid>
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="SizeProportional">
+                <Grid VerticalOptions="FillAndExpand" 
+                      HorizontalOptions="FillAndExpand">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50*" />
                         <ColumnDefinition Width="50*" />
